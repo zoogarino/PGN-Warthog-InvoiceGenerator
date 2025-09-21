@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Car Invoice Template</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="invoice-container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="company-info">
+                <div class="company-name">POCKET GUIDE NAMIBIA</div>
+                <div class="company-details">
+                    PO BOX: 98025<br>
+                    21-5 Old Power Station, Armstrong str, Windhoek<br>
+                    Email: support@pocketguide-namibia.com<br>
+                    Tel: (00 264)81 7163 756<br>
+                    <div class="coordinator-note">(Third Party Coordinator)</div>
+                </div>
+            </div>
+            <div class="invoice-number">
+                <div style="margin-bottom: 10px;">
+                    PGN Reference #<span id="headerReference"></span>
+                </div>
+                <button id="exportPDF" class="export-btn">Export to PDF</button>
+            </div>
+        </div>
+
+        <!-- Supplier and Client Information -->
+        <div class="info-section">
+            <div class="supplier-info">
+                <div class="section-title">SUPPLIER INFORMATION</div>
+                <div style="margin-bottom: 5px;">
+                    <strong>Company:</strong> Warthog: 4x4 Safari Rentals Namibia
+                </div>
+                <div style="margin-bottom: 5px;">
+                    <strong>Address:</strong> Corner of Adler and Hosea Kutako Street<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Windhoek, Namibia
+                </div>
+                <div style="margin-bottom: 5px;">
+                    <strong>Email:</strong> bookings@warthog.com.na
+                </div>
+                <div style="margin-bottom: 5px;">
+                    <strong>Phone:</strong> +264 81 430 3343
+                </div>
+            </div>
+            <div class="client-info">
+                <div class="section-title">CLIENT INFORMATION</div>
+                <div style="margin-bottom: 5px;">
+                    PGN Reference: <span class="editable" contenteditable="true" id="clientReference" data-placeholder="Enter PGN Reference">Enter PGN Reference</span>
+                </div>
+                <div style="margin-bottom: 5px;">
+                    Name: <span class="editable" contenteditable="true">Enter Client Name</span>
+                </div>
+                <div style="margin-bottom: 5px;">
+                    Email: <span class="editable" contenteditable="true">Enter Client Email</span>
+                </div>
+                <div style="margin-bottom: 5px;">
+                    Phone: <span class="editable" contenteditable="true">Enter Client Phone</span>
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <strong>Additional Information:</strong>
+                </div>
+                <div class="editable expandable-field" contenteditable="true" data-placeholder="Enter additional client information such as billing address, special requirements, etc. This field will expand as you type.">
+                </div>
+                <div class="instruction">Click to edit client information and additional details</div>
+            </div>
+        </div>
+
+        <!-- Booking Details Section -->
+        <div class="booking-section">
+            <div class="booking-grid">
+                <div class="booking-item">
+                    <span class="booking-label">BOOKING FROM:</span>
+                    <input type="date" id="startDate" class="date-input" onchange="updateDays()">
+                </div>
+                <div class="booking-item">
+                    <span class="booking-label">BOOKED UNTIL:</span>
+                    <input type="date" id="endDate" class="date-input" onchange="updateDays()">
+                </div>
+                <div class="booking-item">
+                    <span class="booking-label">TOTAL DAYS:</span>
+                    <span id="totalDays">0</span>
+                </div>
+                <div class="booking-item">
+                    <span class="booking-label">PICK UP LOCATION:</span>
+                    <span class="editable" contenteditable="true">[PICKUP LOCATION]</span>
+                </div>
+                <div class="booking-item">
+                    <span class="booking-label">DROP OFF LOCATION:</span>
+                    <span class="editable" contenteditable="true">[DROPOFF LOCATION]</span>
+                </div>
+                <div class="booking-item">
+                    <span class="booking-label">GEAR TYPE:</span>
+                    <span class="editable" contenteditable="true">[GEAR TYPE]</span>
+                </div>
+                <div class="booking-item">
+                    <span class="booking-label">CAMPING EQUIPMENT:</span>
+                    <span class="editable" contenteditable="true">[YES/NO]</span>
+                </div>
+                <div class="booking-item">
+                    <span class="booking-label">FLIGHT DATE/TIME:</span>
+                    <span class="editable" contenteditable="true">[FLIGHT INFO]</span>
+                </div>
+                <div class="booking-item">
+                    <span class="booking-label">NO OF PARTICIPANTS:</span>
+                    <span class="editable" contenteditable="true">[NUMBER]</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Base Costs Section -->
+        <div class="costs-section">
+            <div class="costs-title">DAILY BASE COSTS SECTION:</div>
+            <table class="costs-table">
+                <thead>
+                    <tr>
+                        <th class="description-col">DESCRIPTION:</th>
+                        <th>Qty:</th>
+                        <th>UNIT PRICE:</th>
+                        <th>UNITS:</th>
+                        <th>TOTAL:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="description-col editable" contenteditable="true">Vehicle Rental</td>
+                        <td class="editable qty" contenteditable="true">1</td>
+                        <td class="editable price" contenteditable="true">0.00</td>
+                        <td class="editable units" contenteditable="true">1</td>
+                        <td class="row-total">0.00</td>
+                    </tr>
+                    <tr>
+                        <td class="description-col editable" contenteditable="true">Basic Insurance</td>
+                        <td class="editable qty" contenteditable="true">1</td>
+                        <td class="editable price" contenteditable="true">0.00</td>
+                        <td class="editable units" contenteditable="true">1</td>
+                        <td class="row-total">0.00</td>
+                    </tr>
+                    <tr>
+                        <td class="description-col editable" contenteditable="true">Windshield Insurance</td>
+                        <td class="editable qty" contenteditable="true">1</td>
+                        <td class="editable price" contenteditable="true">0.00</td>
+                        <td class="editable units" contenteditable="true">1</td>
+                        <td class="row-total">0.00</td>
+                    </tr>
+                    <tr>
+                        <td class="description-col editable" contenteditable="true">Tire Insurance</td>
+                        <td class="editable qty" contenteditable="true">1</td>
+                        <td class="editable price" contenteditable="true">0.00</td>
+                        <td class="editable units" contenteditable="true">1</td>
+                        <td class="row-total">0.00</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="4" style="text-align: right;"><strong>SUBTOTAL:</strong></td>
+                        <td><strong id="subtotal">0.00</strong></td>
+                    </tr>
+                    <tr class="vat-row">
+                        <td colspan="4" style="text-align: right;"><strong>VAT (15%):</strong></td>
+                        <td><strong id="vat-amount">0.00</strong></td>
+                    </tr>
+                    <tr class="grand-total-row">
+                        <td colspan="4" style="text-align: right;"><strong>TOTAL:</strong></td>
+                        <td><strong id="grand-total">0.00</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Items Included Section -->
+        <div class="included-section">
+            <div class="included-title">ITEMS INCLUDED:</div>
+            <div class="included-text editable expandable-field" contenteditable="true" data-placeholder="Enter all items, services, and features included in the rental. Include details about unlimited kilometers, insurance coverage, equipment included, airport pickup/dropoff services, vehicle features, etc."></div>
+            <div class="instruction">Click above to edit included items - this section will expand as needed</div>
+        </div>
+
+        <!-- Static Payment Details Section -->
+        <div class="payment-section" style="margin-top: 15px; page-break-inside: avoid; break-inside: avoid;">
+            <div class="payment-title" style="background-color: #e6e6e6; padding: 5px;">PAYMENT / BANK ACCOUNT DETAILS</div>
+            <div class="payment-grid" style="background-color: #f9f9f9;">
+                <div class="payment-label">ACCOUNT NO:</div>
+                <div style="padding: 5px;">62275772070</div>
+                
+                <div class="payment-label">BANK:</div>
+                <div style="padding: 5px;">FNB First National Bank</div>
+                
+                <div class="payment-label">BRANCH CODE:</div>
+                <div style="padding: 5px;">281872</div>
+                
+                <div class="payment-label">SWIFT CODE:</div>
+                <div style="padding: 5px;">FIRNNANX</div>
+            </div>
+        </div>
+
+        <!-- Additional Information Section -->
+        <div class="additional-section">
+            <div class="additional-title">ADDITIONAL INFORMATION:</div>
+            <div style="margin-bottom: 10px;">This Invoice was facilitated by Pocket Guide Namibia</div>
+            <div style="margin-bottom: 10px;">
+                SERVICES AND RETAIL ITEMS ARE PROVIDED BY: Warthog: 4x4 Safari Rentals Namibia
+            </div>
+            <div class="editable expandable-field" contenteditable="true" data-placeholder="Add any additional terms, conditions, or important information specific to this rental company."></div>
+            <div class="instruction">Click above to add additional information, terms, or conditions</div>
+        </div>
+
+        <!-- Thank You Message -->
+        <div class="thank-you">
+            Thank you for choosing Pocket Guide Namibia for your adventure!
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
